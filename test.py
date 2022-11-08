@@ -2,7 +2,7 @@ import unittest
 from word_maker import WordMaker
 from guess_engine import GuessEngine, GuessStatus
 from input_processor import InputProcessor, InputType
-
+from wordle_solver import WordleSolver
 
 class WordleTest(unittest.TestCase):
     def test_word_maker(self):
@@ -16,7 +16,7 @@ class WordleTest(unittest.TestCase):
         words = wordMaker.get_words()
         
         guessEngine = GuessEngine("world", words)
-        self.assertEqual(guessEngine.get_absentLetters(), [])
+        self.assertEqual(guessEngine.get_absent_letters(), [])
         
         self.assertEqual([], guessEngine.guess("abcde"))
         
@@ -41,6 +41,13 @@ class WordleTest(unittest.TestCase):
         self.assertEqual(InputType.INVALID, inputProcessor.process_input("/unknownCommand"))
         self.assertEqual(InputType.INVALID, inputProcessor.process_input("worl3d"))
         self.assertEqual(InputType.INVALID, inputProcessor.process_input("/exit_"))
+        
+    def test_wordle_solver(self):
+        wordMaker = WordMaker(5)
+        wordleSolver = WordleSolver(5, wordMaker.get_words())
+        wordleSolver.record_guess("world", [GuessStatus.CORRECT,
+            GuessStatus.CORRECT, GuessStatus.CORRECT, GuessStatus.CORRECT, GuessStatus.CORRECT])
+        self.assertEqual(wordleSolver.next_suggestion(), "world")
         
 
 

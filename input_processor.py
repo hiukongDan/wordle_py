@@ -7,7 +7,8 @@ class InputType(Enum):
     COMMAND_HINT    = 4
     COMMAND_RESTART = 5
     COMMAND_SOLVE   = 6
-    INVALID         = 7
+    COMMAND_NEW     = 7
+    INVALID         = 8
     
 
 class InputProcessor:
@@ -24,6 +25,7 @@ class InputProcessor:
         if (cmd == "exit"): return InputType.COMMAND_EXIT
         if (cmd == "hint"): return InputType.COMMAND_HINT
         if (cmd == "restart"): return InputType.COMMAND_RESTART
+        if (cmd == "new"): return InputType.COMMAND_NEW
         if (cmd == "solve"): return InputType.COMMAND_SOLVE
         
         return InputType.INVALID
