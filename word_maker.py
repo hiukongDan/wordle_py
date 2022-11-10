@@ -15,7 +15,7 @@ class WordMaker:
                 self.words.append(w)
                 
     def gen_randword(self):
-        self.word = self.words[random.randint(0, len(self.words))]
+        self.word = self.words[random.randint(0, len(self.words)-1)]
     
     
     def get_word(self):
